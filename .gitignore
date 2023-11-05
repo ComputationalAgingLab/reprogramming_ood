@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#data folders and files
+data/
+prepare_data.ipynb
+
 # C extensions
 *.so
 
