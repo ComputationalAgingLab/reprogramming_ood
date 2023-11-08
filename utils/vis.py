@@ -13,7 +13,15 @@ def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90)):
     ax.set_ylabel('Predicted age, years')
     fig.show()
 
-def plot_repr_uncertainty(y_day, y_predict, y_predict_std, days=None, nstd=2, dh=.05, barh=.05):
+
+def plot_repr_uncertainty(y_day, y_predict, y_predict_std, 
+                          days=None, 
+                          nstd=2, 
+                          dh=.05, 
+                          barh=.05,
+                          xlabel='Day of reprogramming',
+                          ylabel='Predicted age, years',
+                          ):
     print('Avg uncertainty std:', y_predict_std.mean())
     pred_df = pd.DataFrame({'Reprogramming day':y_day, 
                             'Predicted age':y_predict,
@@ -31,32 +39,35 @@ def plot_repr_uncertainty(y_day, y_predict, y_predict_std, days=None, nstd=2, dh
     ax.axhline(0, color='grey', ls='--')
     ax.set_xticks(pred_df.index)
     ax.set_xlim([min(pred_df.index) - 0.5, max(pred_df.index) + 0.5])
-    ax.set_xlabel('Day of reprogramming')
-    ax.set_ylabel('Predicted age, years')
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
     ax.legend()
     
     if days is not None:
-        from pymare import meta_regression
-        cond = (y_day == days[0]) | (y_day == days[1])
-        y_rep_pred_mean_sample = y_predict[cond]
-        y_rep_pred_std_sample = y_predict_std[cond]
-        y_rep_day_sample = y_day[cond]
+        if type(dh) is not list:
+            dh = [dh] * len(days)
+        for d, hh in zip(days, dh):
+            from pymare import meta_regression
+            cond = (y_day == d[0]) | (y_day == d[1])
+            y_rep_pred_mean_sample = y_predict[cond]
+            y_rep_pred_std_sample = y_predict_std[cond]
+            y_rep_day_sample = y_day[cond]
 
-        # print(y_rep_day_sample)
-        # print(y_rep_pred_mean_sample)
-        # print(y_rep_pred_std_sample)
+            # print(y_rep_day_sample)
+            # print(y_rep_pred_mean_sample)
+            # print(y_rep_pred_std_sample)
 
-        meta_df_ = meta_regression(y_rep_pred_mean_sample, 
-                        y_rep_pred_std_sample**2, 
-                        (y_rep_day_sample == 0).astype(int),
-                        X_names=['rej'], 
-                        add_intercept=True, 
-                        method='REML').to_df().set_index('name')
-        pval = meta_df_.loc['rej', 'p-value']
-        print(f'P-value of rejuvenation effect between {days[0]} and {days[1]} days is {pval}')
-        barplot_annotate_brackets(days[0], days[1], 
-                                  pval, pred_df.index, pred_df['Predicted age'],
-                                  dh=dh, barh=barh)
+            meta_df_ = meta_regression(y_rep_pred_mean_sample, 
+                            y_rep_pred_std_sample**2, 
+                            (y_rep_day_sample == d[0]).astype(int),
+                            X_names=['rej'], 
+                            add_intercept=True, 
+                            method='REML').to_df().set_index('name')
+            pval = meta_df_.loc['rej', 'p-value']
+            print(f'P-value of rejuvenation effect between {d[0]} and {d[1]} days is {pval}')
+            barplot_annotate_brackets(d[0], d[1], 
+                                    pval, pred_df.index, pred_df['Predicted age'],
+                                    dh=hh, barh=barh)
     fig.show()
 
 
