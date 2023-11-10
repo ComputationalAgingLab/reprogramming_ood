@@ -2,6 +2,19 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 
+METHYLCLOCK_NAMES_MAPPER = {
+    'Horvath':'Horvath (353 CpGs)', 
+    'Hannum':'Hannum (71 CpGs)', 
+    'Levine':'Levine (513 CpGs)', 
+    'BNN':'BNN (353 CpGs)', 
+    'skinHorvath': 'Horvath skin (391 CpGs)', 
+    'PedBE': 'PedBE (84 CpGs)', 
+    'Wu': 'Wu (111 CpGs)',
+    'TL': 'TL (140 CpGs)', 
+    'BLUP': 'BLUP (319607 CpGs)', 
+    'EN': 'Zhang (514 CpGs)', 
+    }
+
 def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90)):
     from sklearn.metrics import r2_score, mean_absolute_error
     fig, ax = plt.subplots(1, 1, figsize=(5,5))
@@ -134,3 +147,4 @@ def barplot_annotate_brackets(num1, num2, data, center, height, yerr=None, dh=.0
         kwargs['fontsize'] = fs
 
     plt.text(*mid, text, **kwargs)
+

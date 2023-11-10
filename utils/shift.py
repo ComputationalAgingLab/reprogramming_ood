@@ -113,7 +113,7 @@ def _ks(expected, observed):
     """
     from scipy.stats import ks_2samp
     stat, pval = ks_2samp(expected, observed)
-    pval = pval if pval > 1e-10 else 1e-10
+    pval = pval if pval > 1e-100 else 1e-100
     return stat, pval
 
 
