@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 #data folders and files
+figs/
 data/
 prepare_data.ipynb
 

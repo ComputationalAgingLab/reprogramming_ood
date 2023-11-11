@@ -26,3 +26,5 @@ def inference_age_multivariate(x, means, cov):
     y_mean_new = mu_y + sxy @ np.linalg.pinv(sx) @ (x - mu_x)
     s_y_new = np.sqrt(sy - sxy @ np.linalg.pinv(sx) @ sxy.T) 
     return y_mean_new, s_y_new
+
+

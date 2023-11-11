@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.stats import pearsonr
 
 METHYLCLOCK_NAMES_MAPPER = {
     'Horvath':'Horvath (353 CpGs)', 
@@ -15,16 +16,17 @@ METHYLCLOCK_NAMES_MAPPER = {
     'EN': 'Zhang (514 CpGs)', 
     }
 
-def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90)):
+def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90), color='k', markersize=50):
     from sklearn.metrics import r2_score, mean_absolute_error
     fig, ax = plt.subplots(1, 1, figsize=(5,5))
-    ax.scatter(y_true, y_predict)
+    ax.scatter(y_true, y_predict, color=color, edgecolors='#333333', s=markersize)
     ax.axline([eq_bounds[0], eq_bounds[0]], [eq_bounds[1], eq_bounds[1]], color='grey', ls='--')
+    r, p = pearsonr(y_true, y_predict)
+    ax.annotate(f'$r$ = {np.round(r, 3)}, P-val={"{0:.2e}".format(p)}', xy=[0.1, 0.9], xycoords='axes fraction')
     ax.annotate(f'$R^2$ = {np.round(r2_score(y_true, y_predict), 3)}', xy=[0.1, 0.85], xycoords='axes fraction')
     ax.annotate(f'MAE = {np.round(mean_absolute_error(y_true, y_predict), 2)}', xy=[0.1, 0.8], xycoords='axes fraction')
     ax.set_xlabel('True age, years')
     ax.set_ylabel('Predicted age, years')
-    fig.show()
 
 
 def plot_repr_uncertainty(y_day, y_predict, y_predict_std, 
