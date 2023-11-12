@@ -16,7 +16,7 @@ METHYLCLOCK_NAMES_MAPPER = {
     'EN': 'Zhang (514 CpGs)', 
     }
 
-def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90), color='k', markersize=50):
+def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90), color='k', markersize=50, units='years'):
     from sklearn.metrics import r2_score, mean_absolute_error
     fig, ax = plt.subplots(1, 1, figsize=(5,5))
     ax.scatter(y_true, y_predict, color=color, edgecolors='#333333', s=markersize)
@@ -25,8 +25,8 @@ def plot_performance_scatter(y_true, y_predict, eq_bounds=(30, 90), color='k', m
     ax.annotate(f'$r$ = {np.round(r, 3)}, P-val={"{0:.2e}".format(p)}', xy=[0.1, 0.9], xycoords='axes fraction')
     ax.annotate(f'$R^2$ = {np.round(r2_score(y_true, y_predict), 3)}', xy=[0.1, 0.85], xycoords='axes fraction')
     ax.annotate(f'MAE = {np.round(mean_absolute_error(y_true, y_predict), 2)}', xy=[0.1, 0.8], xycoords='axes fraction')
-    ax.set_xlabel('True age, years')
-    ax.set_ylabel('Predicted age, years')
+    ax.set_xlabel(f'True age, {units}')
+    ax.set_ylabel(f'Predicted age, {units}')
 
 
 def plot_repr_uncertainty(y_day, y_predict, y_predict_std, 
@@ -43,7 +43,7 @@ def plot_repr_uncertainty(y_day, y_predict, y_predict_std,
                             'Predicted std':y_predict_std,
                             })
     pred_df = pred_df.groupby('Reprogramming day').agg({'Predicted age':np.mean, 
-                                                        'Predicted std':lambda x: np.sqrt(np.sum(np.square(x)))})
+                                                        'Predicted std':lambda x: np.sqrt(np.mean(np.square(x)))})
     fig, ax = plt.subplots(1, 1, figsize=(8, 5))
     ax.scatter(y_day, y_predict)
     ax.plot(pred_df.index, pred_df['Predicted age'], label='Average predicted age')
@@ -83,7 +83,6 @@ def plot_repr_uncertainty(y_day, y_predict, y_predict_std,
             barplot_annotate_brackets(d[0], d[1], 
                                     pval, pred_df.index, pred_df['Predicted age'],
                                     dh=hh, barh=barh)
-    fig.show()
 
 
 #taken from https://stackoverflow.com/questions/11517986/indicating-the-statistically-significant-difference-in-bar-graph
