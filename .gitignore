@@ -7,6 +7,10 @@ __pycache__/
 figs/
 data/
 prepare_data.ipynb
+subdata/Illumina_850k_probes_annotation.csv
+joint_gaussian.ipynb
+tmp_embryo_analysis_human.ipynb
+weight_height_prepare.ipynb
 
 # C extensions
 *.so
