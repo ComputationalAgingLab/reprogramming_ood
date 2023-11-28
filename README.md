@@ -8,21 +8,14 @@ Investigation of out-of-distribution problem when aging clocks predict cell repr
 
 # Title of the paper
 
-A repository containing the code accompanying the research paper "On the Rotational Structure in Neural Data" by Kuzmina E., Kriukov D., Lebedev M.
-[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.09.11.557230v2)
+A repository containing the code accompanying the research paper "Coming Soon" by Kriukov D., Kuzmina E., ...
+(link to biorxiv)
 
 ## Description
 
 This repository contains code from a research paper focused on the analysis of neural activity data. Our work delves into the exploration and characterization of *rotational dynamic* prevalent in various neural datasets. We introduce a mathematical framework, informed by our research, designed to assess and quantify the "rotationess" of datasets. This framework leverages **Gyration Numbers**, a complex-valued metric derived from the eigenvalue decomposition of the differential covariance matrix of the data. The resulting **Gyration Plane** facilitates the comparison and simultaneous analysis of multiple datasets.
 
-<p align="center">
-<img src="image/intro.png" alt>
-
-</p>
-<p align="center">
-<em>The brain areas that were explicitly studied with rotational dynamics approach in rhesus monkeys, humans and rodents. </em>
-</p>
-
+(image here?)
 
 ## Installation
 
@@ -36,29 +29,26 @@ git clone https://github.com/ComputationalAgingLab/reprogramming_ood.git
 cd reprogramming_ood
 ```
 
-3. (optional) We recommend ...
+3. (optional) We recommend to reproduce the results using conda environment but you are free to install all necessary libraries manually. In case you choose conda, install it with the following command:
 
 ```bash
 conda create -n ood python=3.9
 ```
 
-Then activate ...
+Then activate the environment:
 ```bash
 conda activate ood
 ```
 
-
-4. Install the required packages:
+4. Install the required packages within the environment:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Datasets Downloading
 
-1. Run script that downloads and unzip data: `bash prepare_data.sh` or `bash prepare_preproc_datasets.sh`. Or download archive with datasets manually from [here](https://drive.google.com/drive/folders/1AWO8XZpLBW1fkp5ylF6-w6J8gYcnnOkp?usp=sharing). You can also download datasets from the original source from here ... # TODO link to table.
-`dataset.zip` contains raw data, as it is available at origin sourse. `preprocessed2h5.zip` contains already prerocessed datasets, saved to .h5 file as dictionary.
- 
-2. Add path to downloaded datasets to `datasets_config.py` file for convinience.
+Run script that downloads and unzip data: `bash prepare_data.sh`. Or download archive with datasets manually from [here](https://drive.google.com/file/d/11xwxb_m62FymwUeO1vC0KafZ7mog0_wq/view?usp=drive_link). You can also download datasets from GEO (See `paper/Supplementary Table 1.xlsx` for sources of separate datasets).
+`dataset.zip` contains preprocessed data, as it is available at origin sources in GEO. 
 
 ## Usage
 ### Data Preparation
@@ -69,9 +59,6 @@ If you would like to work with datasets used in study, you can see how to pre-pr
 
 - `datasets_analysis.ipynb` - contains tutorial on how to use special class created for working with datasets. It is easy modifiable and allows to use all visualization functions that were used in the study. Have code that was used to render **Fig. S2-S3-S4** and **Fig. 4** from our paper.
 
-- `gyration_plane_tutorial.ipynb` - contains tutorial on how to use and interpret **Gyration Number** concept. How to plot datasets in **Gyration Plan** and compare them. Also, contains bonus explanation of **Curvature** concept.
-
-- `traveling_wave_model.ipnyb` - Have code that was used to render **Fig. 3, 5** and **Fig. S5-S6-S7** from our paper.
 
 
 ### Uncertainty

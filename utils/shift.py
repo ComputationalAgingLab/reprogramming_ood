@@ -180,8 +180,41 @@ def inverse_train_test_procedure(model,
                                  params={},
                                  verbose=1):
     """
-    Perform inversed train test procedure detecting the covariate shift between train and test dataset.
-    The idea of the procedure is based on the reasonable assumption that: 
+    Perform inversed train test procedure (ITTP) detecting the interchangeability between train and test datasets.
+    The idea of the procedure is based on the reasonable assumption that once we obtained a good predictions for
+    test datasets, the predictions themselves can be used for traning a new model. Which in its turn can properly
+    predict the original train dataset.
+    
+    Parameters
+    ----------
+    model : sklearn.BaseModel
+        A base model using for training on both steps. Can be any scikit-learn model.
+        In the present research we used LassoCV because of its automatic hyperparameter search 
+        and built-in CV procedure.
+    
+    X_train : pandas.DataFrame
+        Train set - will be used for train on step 1, and for test on step 2.
+    
+    X_test : pandas.DataFrame
+        Test set - will be used for test on step 1, and for train on step 2.
+    
+    y_train : pandas.Series or numpy.ndarray
+        Train targets - will be used for train on step 1, and for test on step 2.
+
+    y_test : pandas.Series or numpy.ndarray or None
+        Test targets - if provided will be used for test on step 1, and for train on step 2 
+        (falsifiable case of ITTP). If not provided, performance computation for test at 
+        step 2 is impossible (unfalsifiable case of ITTP). 
+    
+    params : dict
+        Any parameters you want to pass to the base model.
+    
+
+    Returns
+    -------
+        (nd.array, nd.array, nd.array, nd.array)
+        first two are predictions on step1 train and test;
+        last two are predictions on step2 train and test.
     """
     from sklearn.metrics import r2_score, mean_absolute_error
     # For Aging train/test sets
