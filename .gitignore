@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 #data folders and files
-figs/*
+figs/*.pdf
 data/
 datasets/
 paper/
