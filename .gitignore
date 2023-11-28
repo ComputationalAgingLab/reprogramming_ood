@@ -7,7 +7,6 @@ __pycache__/
 figs/*.pdf
 data/
 datasets/
-paper/
 prepare_data.ipynb
 subdata/Illumina_850k_probes_annotation.csv
 joint_gaussian.ipynb
