@@ -4,13 +4,17 @@ __pycache__/
 *$py.class
 
 #data folders and files
-figs/
+figs/*
 data/
+datasets/
+paper/
 prepare_data.ipynb
 subdata/Illumina_850k_probes_annotation.csv
 joint_gaussian.ipynb
 tmp_embryo_analysis_human.ipynb
 weight_height_prepare.ipynb
+aging_blood_analysis.ipynb
+*.zip
 
 # C extensions
 *.so
