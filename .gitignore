@@ -5,6 +5,7 @@ __pycache__/
 
 #data folders and files
 figs/*.pdf
+supertest.ipynb
 data/
 datasets/
 prepare_data.ipynb

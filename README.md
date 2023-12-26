@@ -9,7 +9,7 @@ Investigation of out-of-distribution problem when aging clocks predict cell repr
 # Epistemic Uncertainty Challenges Aging Clock Reliability in Predicting Rejuvenation Effects
 
 A repository containing the code accompanying the research paper "Epistemic Uncertainty Challenges Aging Clock Reliability in Predicting Rejuvenation Effects" by Kriukov D., Kuzmina E., Efimov E., Dylov D., and Khrameeva E.
-(link to biorxiv)
+([link to biorXiv](https://www.biorxiv.org/content/10.1101/2023.12.01.569529v1))
 
 ## Description
 
@@ -77,9 +77,18 @@ The following four notebooks contain supplementary information and pairwise test
 ## Citation
 If you use the code or the findings from our paper, **please cite**:
 
-*Plain ref here*
+Kriukov D. et al. Epistemic uncertainty challenges aging clock reliability in predicting rejuvenation effects //bioRxiv. – 2023. – С. 2023.12. 01.569529.
 
-*Bibtex here*
+```
+@article{kriukov2023epistemic,
+  title={Epistemic uncertainty challenges aging clock reliability in predicting rejuvenation effects},
+  author={Kriukov, Dmitrii and Kuzmina, Ekaterina A and Efimov, Evgeniy and Dylov, Dmitry V and Khrameeva, Ekaterina},
+  journal={bioRxiv},
+  pages={2023--12},
+  year={2023},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
 
 ## Contact
 For any questions or clarifications, please reach out to: *dmitrii.kriukov@skoltech.ru*
