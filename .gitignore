@@ -8,6 +8,9 @@ figs/*.pdf
 supertest.ipynb
 data/
 datasets/
+rebuttal/
+paper/
+figs/review/
 prepare_data.ipynb
 subdata/Illumina_850k_probes_annotation.csv
 joint_gaussian.ipynb
